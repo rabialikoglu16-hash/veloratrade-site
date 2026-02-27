@@ -1,45 +1,48 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Velora Store</title>
 
   <style>
     :root{
-      --bg: #0b0d12;
-      --panel: rgba(255,255,255,.06);
-      --panel2: rgba(255,255,255,.085);
-      --stroke: rgba(255,255,255,.12);
-      --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.65);
+      --bg0:#0b0f14;
+      --bg1:#0f1620;
+      --panel:rgba(255,255,255,.06);
+      --panel2:rgba(255,255,255,.04);
+      --stroke:rgba(255,255,255,.14);
+      --text:#f2f6ff;
+      --muted:rgba(242,246,255,.72);
+      --muted2:rgba(242,246,255,.55);
+      --shadow:0 18px 60px rgba(0,0,0,.55);
+      --radius:18px;
 
-      /* Logo ilhamı: Bebek (krem) + Oto (altın) */
+      --gold1: rgba(246,210,122,.22);
+      --gold2: rgba(202,162,72,.16);
+
       --cream1:#f4e7d9;
       --cream2:#e8d6c2;
-
-      --gold1:#f6d27a;
-      --gold2:#caa24f;
-
-      --radius: 18px;
-      --shadow: 0 18px 60px rgba(0,0,0,.55);
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
       color:var(--text);
       background:
-        radial-gradient(900px 500px at 20% 0%, rgba(246,210,122,.14), transparent 60%),
-        radial-gradient(900px 500px at 80% 10%, rgba(244,231,217,.14), transparent 60%),
-        radial-gradient(900px 500px at 50% 120%, rgba(80,130,255,.10), transparent 60%),
-        var(--bg);
+        radial-gradient(900px 500px at 18% 10%, rgba(246,210,122,.12), transparent 55%),
+        radial-gradient(900px 500px at 88% 18%, rgba(244,231,217,.10), transparent 55%),
+        radial-gradient(900px 500px at 60% 90%, rgba(129,196,255,.08), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+      overflow-x:hidden;
     }
 
     a{color:inherit; text-decoration:none}
-    .wrap{max-width:1100px; margin:0 auto; padding:28px 18px 50px}
+    button{font:inherit}
+
+    .wrap{max-width:1100px; margin:0 auto; padding:18px 16px 40px;}
 
     /* Top bar */
     .topbar{
@@ -49,34 +52,27 @@
       border:1px solid var(--stroke);
       background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
       border-radius:999px;
-      box-shadow: var(--shadow);
-      position:sticky; top:14px; z-index:50;
-      left: 0;
-      right: 0;
-
-      max-width: 1100px;
-      margin: 0 auto;
-      
+      box-shadow:var(--shadow);
+      position:sticky;
+      top:14px;
+      z-index:50;
       backdrop-filter: blur(10px);
     }
-    .hero{
-      margin-top: 24px;
-    }
-    .brand{
-      display:flex; align-items:center; gap:10px; min-width:220px;
-    }
+    .brand{display:flex; align-items:center; gap:10px; min-width:220px}
     .brand .mark{
       width:34px; height:34px; border-radius:12px;
       display:grid; place-items:center;
-      background:linear-gradient(135deg, rgba(246,210,122,.22), rgba(244,231,217,.18));
+      background:linear-gradient(135deg, var(--gold1), rgba(244,231,217,.18));
       border:1px solid var(--stroke);
-      font-weight:800;
+      font-weight:900;
+      letter-spacing:.5px;
     }
     .brand .txt{line-height:1.05}
     .brand .txt b{display:block; font-size:14px; letter-spacing:.2px}
-    .brand .txt span{display:block; font-size:12px; color:var(--muted)}
+    .brand .txt span{display:block; font-size:12px; color:var(--muted2)}
 
-    .actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+    .actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
+
     .btn{
       border:1px solid var(--stroke);
       background:rgba(255,255,255,.05);
@@ -84,193 +80,301 @@
       padding:10px 14px;
       border-radius:999px;
       cursor:pointer;
-      font-weight:650;
-      display:inline-flex; gap:10px; align-items:center;
-      transition:transform .12s ease, background .12s ease, border-color .12s ease;
+      display:inline-flex; align-items:center; gap:10px;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
       user-select:none;
+      white-space:nowrap;
     }
-    .btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.075); border-color:rgba(255,255,255,.18)}
+    .btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.07); border-color:rgba(255,255,255,.22)}
     .btn:active{transform:translateY(0)}
-    .btn.gold{
-      background:linear-gradient(135deg, rgba(246,210,122,.24), rgba(202,162,79,.10));
-      border-color:rgba(246,210,122,.32);
+    .btn.primary{
+      background:linear-gradient(135deg, var(--gold1), rgba(255,255,255,.06));
+      border-color:rgba(246,210,122,.35);
     }
-    .btn.cream{
-      background:linear-gradient(135deg, rgba(244,231,217,.24), rgba(232,214,194,.12));
-      border-color:rgba(244,231,217,.28);
+    .btn.ghost{background:transparent}
+
+    .cartBadge{
+      min-width:20px; height:20px; border-radius:999px;
+      padding:0 6px;
+      display:inline-flex; align-items:center; justify-content:center;
+      background:rgba(246,210,122,.20);
+      border:1px solid rgba(246,210,122,.35);
+      font-size:12px;
+      color:var(--text);
     }
 
     /* Hero */
     .hero{
       margin-top:18px;
-      border-radius: var(--radius);
-      border:1px solid var(--stroke);
-      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-      padding:26px 18px;
-      text-align:center;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
-    }
-    .hero h1{
-      margin:0;
-      font-size: clamp(22px, 3.2vw, 34px);
-      letter-spacing:.3px;
-    }
-    .hero p{
-      margin:10px auto 0;
-      max-width:760px;
-      color:var(--muted);
-      line-height:1.5;
-      font-size:14px;
-    }
-
-    /* Grid */
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap:14px;
-      margin-top:14px;
-    }
-    @media(max-width:860px){
-      .grid{grid-template-columns:1fr}
-      .brand{min-width:auto}
-    }
-
-    .card{
-      border-radius: var(--radius);
+      padding:18px 18px;
       border:1px solid var(--stroke);
       background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
-      box-shadow: var(--shadow);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero h1{
+      margin:0 0 6px;
+      font-size:28px;
+      letter-spacing:.2px;
+    }
+    .hero p{margin:0; color:var(--muted); line-height:1.45; max-width:900px}
+
+    /* Grid cards */
+    .grid{margin-top:16px; display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+    @media (max-width: 980px){ .grid{grid-template-columns:1fr;} .brand{min-width:auto} }
+
+    .card{
+      border:1px solid var(--stroke);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
       overflow:hidden;
       position:relative;
     }
-    .card .head{
+    .cardHeader{
+      display:flex; justify-content:space-between; align-items:center;
       padding:12px 12px 0;
-      display:flex; justify-content:space-between; gap:10px; align-items:center;
+      gap:10px;
     }
     .tag{
-      font-size:12px;
+      display:inline-flex; align-items:center;
       padding:6px 10px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      color:rgba(255,255,255,.85);
-      background:rgba(0,0,0,.18);
-    }
-    .tag.cream{border-color: rgba(244,231,217,.35)}
-    .tag.gold{border-color: rgba(246,210,122,.35)}
-
-    .card .content{padding:12px}
-    .logoWrap{
-  border-radius: 16px;
-  border: 1px dashed rgba(255,255,255,.16);
-  background: rgba(255,255,255,.04);
-  padding: 16px;                 /* 40px çok büyüktü, taşırıyordu */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 320px;                 /* sabit alan: taşma olmaz */
-  overflow: hidden;              /* dışarı taşanı keser */
-}
-
-.logoWrap img{
-  width: 100%;
-  height: 100%;
-  object-fit: contain;           /* kırpmadan sığdırır */
-  display: block;
-  border-radius: 14px;
-}
-
-    .card h2{margin:14px 0 6px; font-size:18px}
-    .card p{margin:0; color:var(--muted); line-height:1.55; font-size:13px}
-    .card .row{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin-top:12px;
-      align-items:center;
-    }
-
-    /* Details sections */
-    .section{
-      margin-top:14px;
-      border-radius: var(--radius);
       border:1px solid var(--stroke);
-      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
-      box-shadow: var(--shadow);
+      background:rgba(0,0,0,.22);
+      font-size:12px;
+      color:var(--muted);
+      white-space:nowrap;
+    }
+    .tag.cream{border-color:rgba(232,214,194,.35)}
+    .tag.gold{border-color:rgba(246,210,122,.35)}
+
+    .cardBody{
+      padding:12px;
+      display:grid;
+      grid-template-columns: 260px 1fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    @media (max-width: 560px){ .cardBody{grid-template-columns:1fr;} }
+
+    .logoWrap{
+      border-radius:16px;
+      border:1px dashed rgba(255,255,255,.16);
+      background:rgba(255,255,255,.04);
+      padding:14px;
+      display:grid;
+      place-items:center;
+      min-height:260px;
       overflow:hidden;
     }
-    .section .shead{
-      padding:14px 14px 10px;
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
+    .logoWrap.cream{
+      background: linear-gradient(135deg, rgba(244,231,217,.22), rgba(232,214,194,.10));
+      border-color: rgba(232,214,194,.28);
     }
-    .section .shead h3{margin:0; font-size:16px}
-    .section .shead span{color:var(--muted); font-size:12px}
-    .section .sbody{
-      padding:0 14px 14px;
+    .logoWrap.gold{
+      background: linear-gradient(135deg, rgba(246,210,122,.18), rgba(202,162,72,.08));
+      border-color: rgba(246,210,122,.28);
+    }
+    .logoWrap img{
+      max-width:100%;
+      max-height:320px;
+      border-radius:14px;
+      box-shadow: 0 14px 40px rgba(0,0,0,.55);
+      display:block;
+    }
+
+    .info h2{margin:4px 0 6px; font-size:18px}
+    .info p{margin:0 0 10px; color:var(--muted); line-height:1.45; font-size:13px}
+
+    .info .btnRow{
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+
+    /* Products area */
+    .products{
+      padding:0 12px 14px;
       display:none;
     }
-    .section.open .sbody{display:block}
-    .miniGrid{
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+    .products.open{display:block}
+    .divider{
+      height:1px; background:rgba(255,255,255,.10);
+      margin:0 12px 12px;
+    }
+    .productsHeader{
+      display:flex; align-items:center; justify-content:space-between;
       gap:10px;
-      margin-top:10px;
+      padding:0 2px 10px;
     }
-    @media(max-width:860px){
-      .miniGrid{grid-template-columns:1fr}
+    .productsHeader b{font-size:14px}
+    .productsHeader span{font-size:12px; color:var(--muted2)}
+    .productGrid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap:12px;
     }
-    .mini{
-      border:1px solid rgba(255,255,255,.12);
-      background:rgba(0,0,0,.18);
+    .productCard{
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.04);
       border-radius:14px;
       padding:12px;
+      overflow:hidden;
     }
-    .mini b{display:block; font-size:13px; margin-bottom:6px}
-    .mini p{margin:0; color:var(--muted); font-size:12px; line-height:1.5}
-    .mini .cta{margin-top:10px}
-
-    /* WhatsApp contact block */
-    .wa{
-      margin-top:14px;
-      border-radius: var(--radius);
-      border:1px solid var(--stroke);
-      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
-      box-shadow: var(--shadow);
-      padding:14px;
+    .productCard img{
+      width:100%;
+      height:140px;
+      object-fit:cover;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.20);
+      display:block;
     }
-    .wa h3{margin:0 0 6px; font-size:15px}
-    .wa p{margin:0 0 10px; color:var(--muted); font-size:12.5px; line-height:1.5}
-    .waRow{
-      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
-    }
-    .waRow input{
-      flex:1;
-      min-width:240px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(0,0,0,.22);
-      padding:12px 14px;
+    .productCard h4{
+      margin:10px 0 6px;
+      font-size:13px;
       color:var(--text);
-      outline:none;
+      line-height:1.25;
     }
-    .waRow input::placeholder{color:rgba(255,255,255,.45)}
-    .note{
+    .priceRow{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
       margin-top:8px;
-      color:rgba(255,255,255,.50);
-      font-size:11.5px;
+    }
+    .price{
+      font-weight:800;
+      letter-spacing:.2px;
+    }
+    .mini{
+      padding:8px 10px;
+      border-radius:10px;
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.05);
+      cursor:pointer;
+    }
+
+    .emptyState{
+      border:1px dashed rgba(255,255,255,.18);
+      background:rgba(255,255,255,.03);
+      border-radius:14px;
+      padding:14px;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    /* WhatsApp bar bottom */
+    .waBar{
+      margin-top:14px;
+      padding:12px 14px;
+      border:1px solid var(--stroke);
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    }
+    .waBar .left b{display:block; font-size:14px; margin-bottom:2px}
+    .waBar .left span{display:block; font-size:12px; color:var(--muted)}
+    .waBar .right{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+    .input{
+      background:rgba(0,0,0,.25);
+      border:1px solid var(--stroke);
+      color:var(--text);
+      border-radius:999px;
+      padding:10px 12px;
+      min-width:260px;
+      outline:none;
     }
 
     footer{
-      margin-top:14px;
-      text-align:center;
-      color:rgba(255,255,255,.5);
+      padding:16px 2px 0;
+      color:rgba(255,255,255,.45);
       font-size:12px;
-      padding:14px 6px;
+      text-align:center;
+    }
+
+    /* Cart drawer */
+    .overlay{
+      position:fixed; inset:0;
+      background:rgba(0,0,0,.55);
+      backdrop-filter: blur(4px);
+      display:none;
+      z-index:80;
+    }
+    .overlay.show{display:block}
+    .drawer{
+      position:fixed;
+      top:0; right:0;
+      height:100%;
+      width:min(420px, 92vw);
+      background:linear-gradient(180deg, rgba(15,22,32,.98), rgba(11,15,20,.98));
+      border-left:1px solid rgba(255,255,255,.12);
+      box-shadow: -24px 0 60px rgba(0,0,0,.55);
+      transform: translateX(100%);
+      transition: transform .18s ease;
+      z-index:90;
+      display:flex;
+      flex-direction:column;
+    }
+    .drawer.show{transform: translateX(0)}
+    .drawerHead{
+      padding:14px;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+    }
+    .drawerHead b{font-size:14px}
+    .drawerBody{padding:14px; overflow:auto; flex:1}
+    .line{height:1px; background:rgba(255,255,255,.10); margin:12px 0}
+
+    .cartItem{
+      display:flex; align-items:flex-start; justify-content:space-between;
+      gap:10px;
+      padding:10px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.03);
+      border-radius:14px;
+      margin-bottom:10px;
+    }
+    .cartItem .meta{min-width:0}
+    .cartItem .meta b{display:block; font-size:13px; margin-bottom:2px}
+    .cartItem .meta span{display:block; color:var(--muted2); font-size:12px}
+    .qty{
+      display:flex; align-items:center; gap:8px;
+      white-space:nowrap;
+    }
+    .qty button{
+      width:30px; height:30px; border-radius:10px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.05);
+      color:var(--text);
+      cursor:pointer;
+    }
+    .totals{display:flex; align-items:center; justify-content:space-between; gap:10px}
+    .totals b{font-size:14px}
+    .muted{color:var(--muted2); font-size:12px}
+
+    .note{
+      width:100%;
+      min-height:70px;
+      resize:vertical;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      outline:none;
     }
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <div class="topbar">
+
+    <div class="topbar" role="navigation" aria-label="Üst Menü">
       <div class="brand">
         <div class="mark">V</div>
         <div class="txt">
@@ -280,261 +384,405 @@
       </div>
 
       <div class="actions">
-        <!-- 1) Mağazaya direkt WhatsApp -->
-        <button class="btn gold" id="btnStoreWA" type="button">WhatsApp (Mağaza)</button>
-
-        <!-- Kategori butonları -->
-        <button class="btn cream" type="button" data-scroll="#sec-bebek">Bebek & Çocuk</button>
-        <button class="btn gold" type="button" data-scroll="#sec-oto">Oto Aksesuar</button>
+        <button class="btn primary" id="btnWhatsAppStore" type="button">WhatsApp (Mağaza)</button>
+        <button class="btn" type="button" onclick="scrollToEl('bebekCard')">Bebek & Çocuk</button>
+        <button class="btn" type="button" onclick="scrollToEl('otoCard')">Oto Aksesuar</button>
+        <button class="btn" id="btnCart" type="button">
+          Sepet <span class="cartBadge" id="cartCount">0</span>
+        </button>
       </div>
     </div>
 
-    <div class="hero">
+    <section class="hero">
       <h1>Modern, Şık ve Hızlı</h1>
       <p>
-        Velora Store için iki kategoriyi tek sayfada premium bir tasarımla topladık.
-        “WhatsApp (Mağaza)” butonu doğrudan mağazaya yazar.
-        “Kategoriyi Aç” butonları ilgili bölümü açar.
+        Velora Store için iki kategoriyi tek sayfada “marka hissi” veren bir tasarımda topladık.
+        <b>“WhatsApp (Mağaza)”</b> butonu doğrudan mağazaya yazar. <b>“Kategoriyi Aç”</b> butonları ilgili bölümü açar.
+        Ürünler hazır olduğunda kartların altında listelenir, sepete eklenir ve WhatsApp’tan sipariş gönderilir.
       </p>
-    </div>
+    </section>
 
-    <!-- Kartlar -->
-    <div class="grid" id="kategoriler">
-      <!-- Bebek -->
-      <div class="card">
-        <div class="head">
-          <div class="tag">Bebek & Çocuk</div>
-          <div class="tag cream">Krem Tema</div>
+    <section class="grid" aria-label="Kategoriler">
+
+      <!-- Bebek & Çocuk -->
+      <article class="card" id="bebekCard">
+        <div class="cardHeader">
+          <span class="tag cream">Bebek & Çocuk</span>
+          <span class="tag cream">Krem Tema</span>
         </div>
 
-        <div class="content">
+        <div class="cardBody">
           <div class="logoWrap cream">
             <img src="velora-bebek.jpg" alt="Velora Bebek & Çocuk Logo">
           </div>
 
-          <h2>Bebek & Çocuk Giyim</h2>
-          <p>Yumuşak tonlar ve sade bir stil ile modern bir vitrin. (İstersen buraya ürün kartları/slider ekleriz.)</p>
+          <div class="info">
+            <h2>Bebek & Çocuk Giyim</h2>
+            <p>
+              Yumuşak, sıcak tonlar ve premium kart düzeni. Ürünler bu kartın altında e-ticaret gibi listelenecek:
+              görsel + isim + fiyat + “Sepete Ekle”.
+            </p>
 
-          <div class="row">
-            <!-- 2) Kategori aç -->
-            <button class="btn cream" type="button" data-open="#sec-bebek">Kategoriyi Aç</button>
-            <!-- hızlı WhatsApp: kategori mesajı ile -->
-            <button class="btn" type="button" data-wa="bebek">WhatsApp’tan Sor</button>
+            <div class="btnRow">
+              <button class="btn" type="button" onclick="toggleProducts('bebek')">Kategoriyi Aç</button>
+              <button class="btn ghost" type="button" onclick="askOnWhatsApp('Bebek & Çocuk')">WhatsApp’tan Sor</button>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Oto -->
-      <div class="card">
-        <div class="head">
-          <div class="tag">Oto Aksesuar</div>
-          <div class="tag gold">Siyah/Altın Tema</div>
+        <div class="divider"></div>
+
+        <div class="products" id="bebekProducts">
+          <div class="productsHeader">
+            <div>
+              <b>Bebek & Çocuk Ürünleri</b><br>
+              <span>Ürünler eklendiğinde burada görünecek</span>
+            </div>
+            <button class="btn" type="button" onclick="toggleProducts('bebek')">Kapat</button>
+          </div>
+
+          <div id="bebekList"></div>
+        </div>
+      </article>
+
+      <!-- Oto Aksesuar -->
+      <article class="card" id="otoCard">
+        <div class="cardHeader">
+          <span class="tag gold">Oto Aksesuar</span>
+          <span class="tag gold">Siyah/Altın Tema</span>
         </div>
 
-        <div class="content">
+        <div class="cardBody">
           <div class="logoWrap gold">
             <img src="velora-oto.jpg" alt="Velora Oto Logo">
           </div>
 
-          <h2>Oto Aksesuar</h2>
-          <p>Premium görünüm: koyu zemin + altın vurgular. Ürünler için “koleksiyon/galeri” yapısı eklemeye çok uygun.</p>
+          <div class="info">
+            <h2>Oto Aksesuar</h2>
+            <p>
+              Premium görünüm: koyu zemin + altın vurgular. Ürünler altında listelenir, sepete eklenir ve WhatsApp’tan
+              tek mesajla sipariş verilir.
+            </p>
 
-          <div class="row">
-            <!-- 2) Kategori aç -->
-            <button class="btn gold" type="button" data-open="#sec-oto">Kategoriyi Aç</button>
-            <!-- hızlı WhatsApp: kategori mesajı ile -->
-            <button class="btn" type="button" data-wa="oto">WhatsApp’tan Sor</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Detay Bölümler (Kategoriyi Aç burayı açacak) -->
-    <section class="section" id="sec-bebek">
-      <div class="shead">
-        <div>
-          <h3>👶 Bebek & Çocuk Giyim</h3>
-          <span>Koleksiyon / ürün alanı (şimdilik örnek)</span>
-        </div>
-        <button class="btn cream" type="button" data-toggle="#sec-bebek">Aç / Kapat</button>
-      </div>
-
-      <div class="sbody">
-        <div class="miniGrid">
-          <div class="mini">
-            <b>Yeni Sezon</b>
-            <p>Yeni sezon ürünleri burada listelenebilir.</p>
-            <div class="cta">
-              <button class="btn cream" type="button" data-wa="bebek">WhatsApp’tan Yeni Sezon Sor</button>
-            </div>
-          </div>
-
-          <div class="mini">
-            <b>Beden / Stok</b>
-            <p>Stok ve beden bilgisi için hızlı sor.</p>
-            <div class="cta">
-              <button class="btn" type="button" data-wa="bebek">WhatsApp’tan Beden Sor</button>
-            </div>
-          </div>
-
-          <div class="mini">
-            <b>Kargo / İade</b>
-            <p>Kargo ve iade bilgilerini buraya ekleyebilirsin.</p>
-            <div class="cta">
-              <button class="btn" type="button" data-wa="bebek">WhatsApp’tan Kargo Sor</button>
+            <div class="btnRow">
+              <button class="btn" type="button" onclick="toggleProducts('oto')">Kategoriyi Aç</button>
+              <button class="btn ghost" type="button" onclick="askOnWhatsApp('Oto Aksesuar')">WhatsApp’tan Sor</button>
             </div>
           </div>
         </div>
-      </div>
+
+        <div class="divider"></div>
+
+        <div class="products" id="otoProducts">
+          <div class="productsHeader">
+            <div>
+              <b>Oto Aksesuar Ürünleri</b><br>
+              <span>Ürünler eklendiğinde burada görünecek</span>
+            </div>
+            <button class="btn" type="button" onclick="toggleProducts('oto')">Kapat</button>
+          </div>
+
+          <div id="otoList"></div>
+        </div>
+      </article>
+
     </section>
 
-    <section class="section" id="sec-oto">
-      <div class="shead">
-        <div>
-          <h3>🚗 Oto Aksesuar</h3>
-          <span>Koleksiyon / ürün alanı (şimdilik örnek)</span>
-        </div>
-        <button class="btn gold" type="button" data-toggle="#sec-oto">Aç / Kapat</button>
+    <!-- WhatsApp / Hızlı Sipariş -->
+    <section class="waBar" aria-label="WhatsApp İletişim">
+      <div class="left">
+        <b>WhatsApp ile Sipariş</b>
+        <span>Sepete ürün eklediğinde “Sepet → WhatsApp’tan Sipariş Ver” ile tek mesajda gönderebilirsin.</span>
       </div>
-
-      <div class="sbody">
-        <div class="miniGrid">
-          <div class="mini">
-            <b>Sibop Kapakları</b>
-            <p>Ürün modelleri / renkler / set bilgisi burada.</p>
-            <div class="cta">
-              <button class="btn gold" type="button" data-wa="oto">WhatsApp’tan Sibop Sor</button>
-            </div>
-          </div>
-
-          <div class="mini">
-            <b>Uyumluluk</b>
-            <p>Hangi araçlarla uyumlu? Hızlıca sor.</p>
-            <div class="cta">
-              <button class="btn" type="button" data-wa="oto">WhatsApp’tan Uyumluluk Sor</button>
-            </div>
-          </div>
-
-          <div class="mini">
-            <b>Kargo / Teslimat</b>
-            <p>Teslimat süresi, kargo bilgisi alanı.</p>
-            <div class="cta">
-              <button class="btn" type="button" data-wa="oto">WhatsApp’tan Teslimat Sor</button>
-            </div>
-          </div>
-        </div>
+      <div class="right">
+        <input class="input" id="quickNote" placeholder="Sipariş notu (opsiyonel) — örn: renk, beden, araç modeli" />
+        <button class="btn primary" type="button" onclick="openCart()">Sepeti Aç</button>
       </div>
     </section>
-
-    <!-- WhatsApp ile İletişim (kullanıcı numarasını da yazabilir) -->
-    <div class="wa" id="wa">
-      <h3>WhatsApp ile İletişim</h3>
-      <p>
-        Buraya kendi WhatsApp numaranı girip tek tuşla konuşmayı başlatabilirsin.
-        Format: <b>90</b> ile başlayacak (örnek: 905300882492).
-      </p>
-
-      <div class="waRow">
-        <input id="waInput" type="tel" inputmode="numeric" placeholder="Örn: 905300882492" />
-        <button class="btn gold" id="btnUserWA" type="button">WhatsApp’tan Yaz</button>
-      </div>
-
-      <div class="note">
-        İpucu: Üstteki “WhatsApp (Mağaza)” butonu <b>otomatik</b> mağazaya yazar.
-      </div>
-    </div>
 
     <footer>© 2026 Velora Store — Tüm Hakları Saklıdır</footer>
   </div>
 
+  <!-- Cart Drawer -->
+  <div class="overlay" id="overlay" onclick="closeCart()"></div>
+
+  <aside class="drawer" id="drawer" aria-label="Sepet">
+    <div class="drawerHead">
+      <b>Sepet</b>
+      <button class="btn" type="button" onclick="closeCart()">Kapat</button>
+    </div>
+
+    <div class="drawerBody">
+      <div id="cartEmpty" class="emptyState" style="display:none;">
+        <div>
+          <b>Sepet boş.</b><br>
+          Ürün eklediğinde burada listelenecek.
+        </div>
+        <button class="btn primary" type="button" onclick="closeCart()">Devam Et</button>
+      </div>
+
+      <div id="cartItems"></div>
+
+      <div class="line"></div>
+
+      <div class="totals">
+        <span class="muted">Ara Toplam</span>
+        <b id="cartTotal">₺0</b>
+      </div>
+
+      <p class="muted" style="margin:10px 0 6px;">Not (opsiyonel)</p>
+      <textarea class="note" id="cartNote" placeholder="Örn: Bebek takımında beden 2-3 yaş, oto aksesuar siyah renk…"></textarea>
+
+      <div style="height:10px"></div>
+
+      <button class="btn primary" type="button" onclick="checkoutWhatsApp()">WhatsApp’tan Sipariş Ver</button>
+      <div style="height:8px"></div>
+      <button class="btn" type="button" onclick="clearCart()">Sepeti Temizle</button>
+    </div>
+  </aside>
+
   <script>
-    // ✅ Senin mağaza numaran (0 yok, 90 var)
-    const STORE_WHATSAPP = "905300882492";
+    // =========================
+    //  MAĞAZA AYARLARI
+    // =========================
+    const STORE = {
+      WHATSAPP: "905300882492", // Sabit mağaza numarası (90 ile)
+      STORE_NAME: "Velora Store"
+    };
 
-    function normalizePhoneTR(raw) {
-      // Sadece rakam bırak
-      const digits = (raw || "").replace(/\D/g, "");
-      if (!digits) return "";
+    // Şimdilik ürün EKLEMEYELİM dediğin için boş.
+    // Sonra eklemek istersen sadece buraya item eklemen yeterli.
+    // Örnek:
+    // { id:"b1", cat:"bebek", name:"Organik Bebek Takımı", price:349, img:"urun1.jpg" }
+    const PRODUCTS = {
+      bebek: [],
+      oto: []
+    };
 
-      // "0" ile başladıysa kaldırıp 90 ekle
-      if (digits.startsWith("0")) return "9" + digits; // 0xxx -> 90xxx
-      // 90 ile başladıysa aynı
-      if (digits.startsWith("90")) return digits;
-      // +90 yazılmışsa zaten digit olarak 90 gelir.
-      // Kullanıcı direkt 5xx... yazarsa 90 ekle
-      if (digits.startsWith("5")) return "90" + digits;
+    // Sepet (id -> {id,name,price,qty})
+    const cart = new Map();
 
-      return digits; // en kötü ihtimal
+    // =========================
+    //  YARDIMCI
+    // =========================
+    const tl = (n) => "₺" + (Number(n || 0)).toLocaleString("tr-TR");
+    const el = (id) => document.getElementById(id);
+
+    function scrollToEl(id){
+      const node = el(id);
+      if(!node) return;
+      node.scrollIntoView({behavior:"smooth", block:"start"});
     }
 
-    function openWhatsApp(phone, message) {
-      const p = normalizePhoneTR(phone);
-      if (!p) {
-        alert("Lütfen geçerli bir numara gir.");
+    // =========================
+    //  WHATSAPP
+    // =========================
+    function openWhatsApp(text){
+      const url = "https://wa.me/" + STORE.WHATSAPP + "?text=" + encodeURIComponent(text);
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+
+    function askOnWhatsApp(category){
+      const msg =
+        `${STORE.STORE_NAME} merhaba 👋\n` +
+        `${category} kategorisi hakkında bilgi almak istiyorum.\n` +
+        `Ürün/fiyat önerisi paylaşabilir misiniz?`;
+      openWhatsApp(msg);
+    }
+
+    el("btnWhatsAppStore").addEventListener("click", () => {
+      const msg = `${STORE.STORE_NAME} merhaba 👋\nMağazanız hakkında bilgi almak istiyorum.`;
+      openWhatsApp(msg);
+    });
+
+    // =========================
+    //  KATEGORİ ÜRÜN ALANI
+    // =========================
+    function toggleProducts(cat){
+      const box = el(cat + "Products");
+      if(!box) return;
+
+      const isOpen = box.classList.contains("open");
+      document.querySelectorAll(".products").forEach(p => p.classList.remove("open"));
+      if(!isOpen){
+        box.classList.add("open");
+        renderCategory(cat);
+        // Açınca yumuşakça biraz aşağı kaydırsın (kullanım rahatlığı)
+        setTimeout(() => box.scrollIntoView({behavior:"smooth", block:"start"}), 60);
+      }
+    }
+
+    function renderCategory(cat){
+      const listHost = el(cat + "List");
+      const items = PRODUCTS[cat] || [];
+
+      if(items.length === 0){
+        listHost.innerHTML = `
+          <div class="emptyState">
+            <div>
+              <b>Ürünler yakında.</b><br>
+              Şimdilik bu kategoriye ürün eklemedik. İstersen “WhatsApp’tan Sor” ile bilgi alabilirsin.
+            </div>
+            <button class="btn primary" type="button" onclick="askOnWhatsApp('${cat === "bebek" ? "Bebek & Çocuk" : "Oto Aksesuar"}')">
+              WhatsApp’tan Sor
+            </button>
+          </div>
+        `;
         return;
       }
-      const text = encodeURIComponent(message || "");
-      const url = "https://wa.me/" + p + (text ? ("?text=" + text) : "");
-      window.open(url, "_blank");
+
+      const grid = document.createElement("div");
+      grid.className = "productGrid";
+
+      items.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "productCard";
+        card.innerHTML = `
+          <img src="${p.img}" alt="${p.name}">
+          <h4>${p.name}</h4>
+          <div class="priceRow">
+            <span class="price">${tl(p.price)}</span>
+            <button class="mini" type="button">Sepete Ekle</button>
+          </div>
+        `;
+        card.querySelector("button").addEventListener("click", () => addToCart(p));
+        grid.appendChild(card);
+      });
+
+      listHost.innerHTML = "";
+      listHost.appendChild(grid);
     }
 
-    // 1) Mağazaya direkt WhatsApp
-    document.getElementById("btnStoreWA").addEventListener("click", () => {
-      openWhatsApp(STORE_WHATSAPP, "Merhaba, Velora Store hakkında bilgi almak istiyorum.");
-    });
+    // =========================
+    //  SEPET
+    // =========================
+    function addToCart(p){
+      const existing = cart.get(p.id);
+      if(existing){
+        existing.qty += 1;
+        cart.set(p.id, existing);
+      }else{
+        cart.set(p.id, { id:p.id, name:p.name, price:Number(p.price), qty:1 });
+      }
+      updateCartUI();
+      // Mini feedback
+      alert(`${p.name} sepete eklendi ✅`);
+    }
 
-    // Kullanıcının girdiği numara ile WhatsApp
-    document.getElementById("btnUserWA").addEventListener("click", () => {
-      const val = document.getElementById("waInput").value;
-      if (!val) {
-        alert("Numaranı yaz (örnek: 905300882492).");
+    function removeFromCart(id){
+      cart.delete(id);
+      updateCartUI();
+    }
+
+    function changeQty(id, delta){
+      const item = cart.get(id);
+      if(!item) return;
+      item.qty += delta;
+      if(item.qty <= 0) cart.delete(id);
+      else cart.set(id, item);
+      updateCartUI();
+    }
+
+    function clearCart(){
+      cart.clear();
+      updateCartUI();
+    }
+
+    function cartTotals(){
+      let total = 0;
+      let count = 0;
+      cart.forEach(i => {
+        total += i.price * i.qty;
+        count += i.qty;
+      });
+      return {total, count};
+    }
+
+    function updateCartUI(){
+      const {total, count} = cartTotals();
+      el("cartCount").textContent = String(count);
+      el("cartTotal").textContent = tl(total);
+
+      const itemsHost = el("cartItems");
+      const empty = el("cartEmpty");
+
+      if(count === 0){
+        itemsHost.innerHTML = "";
+        empty.style.display = "flex";
         return;
       }
-      openWhatsApp(val, "Merhaba, Velora Store sayfasından yazıyorum.");
-    });
+      empty.style.display = "none";
 
-    // 2) Kategoriyi Aç: ilgili bölüme kaydır + aç
-    function openSection(selector) {
-      const el = document.querySelector(selector);
-      if (!el) return;
-      el.classList.add("open");
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-      // biraz gecikmeyle üstteki sticky barı hesaba katmak için ufak kaydır
-      setTimeout(() => window.scrollBy({ top: -80, behavior: "smooth" }), 250);
+      itemsHost.innerHTML = "";
+      cart.forEach(item => {
+        const row = document.createElement("div");
+        row.className = "cartItem";
+        row.innerHTML = `
+          <div class="meta">
+            <b>${item.name}</b>
+            <span>${tl(item.price)} • Adet: ${item.qty}</span>
+          </div>
+          <div class="qty">
+            <button type="button" aria-label="Azalt">−</button>
+            <span>${item.qty}</span>
+            <button type="button" aria-label="Arttır">+</button>
+            <button type="button" aria-label="Sil" title="Sil">✕</button>
+          </div>
+        `;
+        const btns = row.querySelectorAll("button");
+        btns[0].addEventListener("click", () => changeQty(item.id, -1));
+        btns[1].addEventListener("click", () => changeQty(item.id, +1));
+        btns[2].addEventListener("click", () => removeFromCart(item.id));
+        itemsHost.appendChild(row);
+      });
     }
 
-    // Aç butonları
-    document.querySelectorAll("[data-open]").forEach(btn => {
-      btn.addEventListener("click", () => {
-        openSection(btn.getAttribute("data-open"));
-      });
+    // Drawer open/close
+    function openCart(){
+      el("overlay").classList.add("show");
+      el("drawer").classList.add("show");
+      // Notu eşitle
+      const qn = el("quickNote").value.trim();
+      if(qn && !el("cartNote").value.trim()) el("cartNote").value = qn;
+      updateCartUI();
+    }
+    function closeCart(){
+      el("overlay").classList.remove("show");
+      el("drawer").classList.remove("show");
+    }
+
+    el("btnCart").addEventListener("click", openCart);
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape") closeCart();
     });
 
-    // Toggle butonları
-    document.querySelectorAll("[data-toggle]").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const sel = btn.getAttribute("data-toggle");
-        const el = document.querySelector(sel);
-        if (!el) return;
-        el.classList.toggle("open");
-      });
-    });
+    function checkoutWhatsApp(){
+      const {total, count} = cartTotals();
+      if(count === 0){
+        alert("Sepet boş. Ürün eklediğinde sipariş gönderebilirsin.");
+        return;
+      }
 
-    // Üst menü kategori butonları: sadece kaydır + aç
-    document.querySelectorAll("[data-scroll]").forEach(btn => {
-      btn.addEventListener("click", () => openSection(btn.getAttribute("data-scroll")));
-    });
+      const note = el("cartNote").value.trim() || el("quickNote").value.trim();
+      let msg = `${STORE.STORE_NAME} merhaba 👋\nSipariş vermek istiyorum:\n\n`;
 
-    // Kategoriye özel WhatsApp hızlı mesajları
-    document.querySelectorAll("[data-wa]").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const type = btn.getAttribute("data-wa");
-        const msg = (type === "oto")
-          ? "Merhaba, Oto Aksesuar kategorisindeki ürünler hakkında bilgi almak istiyorum."
-          : "Merhaba, Bebek & Çocuk Giyim kategorisindeki ürünler hakkında bilgi almak istiyorum.";
-        openWhatsApp(STORE_WHATSAPP, msg);
+      cart.forEach(i => {
+        msg += `• ${i.name} — ${i.qty} adet — ${tl(i.price * i.qty)}\n`;
       });
-    });
+
+      msg += `\nAra Toplam: ${tl(total)}\n`;
+
+      if(note){
+        msg += `\nNot: ${note}\n`;
+      }
+
+      msg += `\nTeşekkürler.`;
+
+      openWhatsApp(msg);
+    }
+
+    // İlk yük
+    updateCartUI();
   </script>
 </body>
 </html>
