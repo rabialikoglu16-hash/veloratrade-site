@@ -1,55 +1,461 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Velora Store</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
-        }
-        header {
-            background-color: #ff6b81;
-            color: white;
-            padding: 20px;
-        }
-        section {
-            padding: 40px;
-        }
-        .btn {
-            background-color: #333;
-            color: white;
-            padding: 12px 25px;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        footer {
-            background-color: #222;
-            color: white;
-            padding: 15px;
-            margin-top: 30px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Velora Store</title>
+
+  <style>
+    :root{
+      /* Logo ilhamı: Bebek (krem) + Oto (siyah/altın) */
+      --bg: #0b0b0f;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.10);
+      --text: #f5f5f7;
+      --muted: rgba(245,245,247,.75);
+
+      --gold1: #f6d27a;
+      --gold2: #b98a2f;
+
+      --cream1: #f3e7d8;
+      --cream2: #e6d2bd;
+
+      --stroke: rgba(255,255,255,.14);
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --radius: 18px;
+    }
+
+    *{ box-sizing: border-box; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue";
+      background:
+        radial-gradient(1200px 600px at 10% 10%, rgba(246,210,122,.22), transparent 60%),
+        radial-gradient(1000px 600px at 90% 20%, rgba(230,210,189,.18), transparent 55%),
+        radial-gradient(900px 700px at 30% 90%, rgba(255,255,255,.08), transparent 60%),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    a{ color: inherit; text-decoration: none; }
+
+    .container{
+      width: min(1100px, 92%);
+      margin: 0 auto;
+      padding: 26px 0 60px;
+    }
+
+    /* Top bar */
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+      padding: 14px 16px;
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.04);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      backdrop-filter: blur(10px);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      min-width: 210px;
+    }
+
+    .brand-badge{
+      width: 42px; height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(246,210,122,.9), rgba(230,210,189,.75));
+      box-shadow: 0 10px 25px rgba(0,0,0,.35);
+      display:grid;
+      place-items:center;
+      font-weight: 900;
+      color: #121217;
+    }
+
+    .brand-title{
+      line-height: 1.1;
+    }
+    .brand-title b{
+      display:block;
+      font-size: 16px;
+      letter-spacing: .3px;
+    }
+    .brand-title span{
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .pill{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      justify-content:flex-end;
+      flex-wrap: wrap;
+    }
+
+    .btn{
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 999px;
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      cursor:pointer;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+      user-select:none;
+    }
+    .btn:hover{
+      background: rgba(255,255,255,.10);
+      border-color: rgba(255,255,255,.22);
+    }
+    .btn:active{
+      transform: scale(.98);
+    }
+
+    .btn--gold{
+      border-color: rgba(246,210,122,.35);
+      background: linear-gradient(135deg, rgba(246,210,122,.22), rgba(185,138,47,.16));
+    }
+
+    .btn--cream{
+      border-color: rgba(230,210,189,.35);
+      background: linear-gradient(135deg, rgba(243,231,216,.18), rgba(230,210,189,.12));
+    }
+
+    /* Hero */
+    .hero{
+      margin-top: 18px;
+      padding: 32px 18px;
+      border-radius: var(--radius);
+      border: 1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      text-align:center;
+    }
+
+    .hero h1{
+      margin: 6px 0 10px;
+      font-size: clamp(26px, 3.6vw, 44px);
+      letter-spacing: .3px;
+    }
+    .hero p{
+      margin: 0 auto;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: clamp(14px, 1.8vw, 16px);
+      line-height: 1.6;
+    }
+
+    .grid{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 840px){
+      .grid{ grid-template-columns: 1fr; }
+      .brand{ min-width: auto; }
+    }
+
+    .card{
+      border-radius: var(--radius);
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.05);
+      box-shadow: 0 14px 45px rgba(0,0,0,.45);
+      overflow:hidden;
+      position: relative;
+    }
+
+    .card .header{
+      padding: 18px 18px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+    }
+
+    .tag{
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      color: rgba(255,255,255,.86);
+      background: rgba(0,0,0,.18);
+    }
+
+    .card .content{
+      padding: 18px;
+      display:grid;
+      gap: 12px;
+    }
+
+    .logoWrap{
+      display:grid;
+      place-items:center;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px dashed rgba(255,255,255,.18);
+      background: rgba(0,0,0,.18);
+    }
+
+    .logoWrap img{
+      width: min(280px, 85%);
+      height: auto;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.45);
+      display:block;
+    }
+
+    .card h2{
+      margin: 6px 0 0;
+      font-size: 20px;
+      letter-spacing: .2px;
+    }
+
+    .card p{
+      margin:0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .actions{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    /* WhatsApp Panel */
+    .wa{
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: var(--radius);
+      border: 1px solid var(--stroke);
+      background: rgba(255,255,255,.05);
+      box-shadow: 0 14px 45px rgba(0,0,0,.45);
+      display:grid;
+      gap: 12px;
+    }
+
+    .wa h3{
+      margin:0;
+      font-size: 18px;
+    }
+
+    .wa p{
+      margin:0;
+      color: var(--muted);
+      line-height:1.6;
+      font-size: 14px;
+    }
+
+    .waRow{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items:center;
+    }
+
+    .input{
+      flex: 1 1 260px;
+      min-width: 220px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.25);
+      color: var(--text);
+      outline: none;
+    }
+    .input::placeholder{ color: rgba(245,245,247,.55); }
+
+    .hint{
+      font-size: 12px;
+      color: rgba(245,245,247,.62);
+    }
+
+    footer{
+      margin-top: 22px;
+      padding: 16px;
+      text-align:center;
+      color: rgba(245,245,247,.60);
+      font-size: 12px;
+    }
+  </style>
 </head>
+
 <body>
+  <div class="container">
 
-<header>
-    <h1>Velora Store</h1>
-    <p>Bebek & Çocuk Giyim | Oto Aksesuar</p>
-</header>
+    <div class="topbar">
+      <div class="brand">
+        <div class="brand-badge">V</div>
+        <div class="brand-title">
+          <b>Velora Store</b>
+          <span>Bebek & Çocuk Giyim • Oto Aksesuar</span>
+        </div>
+      </div>
 
-<section>
-    <h2>Hoş Geldiniz</h2>
-    <p>Kaliteli ve uygun fiyatlı ürünler için doğru yerdesiniz.</p>
-    <a href="#" class="btn">Ürünleri Gör</a>
-</section>
+      <div class="pill">
+        <!-- MAĞAZA WhatsApp: buraya kendi mağaza numaranı yazacağız -->
+        <a id="storeWaBtn" class="btn btn--gold" href="#" target="_blank" rel="noopener">
+          WhatsApp (Mağaza)
+        </a>
 
-<footer>
-    © 2026 Velora Store - Tüm Hakları Saklıdır
-</footer>
+        <a class="btn btn--cream" href="#kategoriler">
+          Kategoriler
+        </a>
+      </div>
+    </div>
 
+    <div class="hero">
+      <h1>Modern, Şık ve Hızlı</h1>
+      <p>
+        Velora Store için iki kategoriyi tek sayfada modern bir tasarımla topladık.
+        Logolar yüklü olduğu için sayfada otomatik görünecek.
+      </p>
+    </div>
+
+    <div id="kategoriler" class="grid">
+
+      <!-- Bebek / Çocuk -->
+      <div class="card">
+        <div class="header">
+          <div class="tag">Bebek & Çocuk</div>
+          <div class="tag" style="border-color: rgba(230,210,189,.35);">
+            Krem Tema
+          </div>
+        </div>
+        <div class="content">
+          <div class="logoWrap" style="background: linear-gradient(135deg, rgba(243,231,216,.18), rgba(230,210,189,.10));">
+            <img src="velora-bebek.jpg" alt="Velora Bebek & Çocuk Logo">
+          </div>
+
+          <h2>Bebek & Çocuk Giyim</h2>
+          <p>
+            Yumuşak tonlar ve sade bir stil ile modern bir vitrin.
+            (İstersen buraya ürün kartları da ekleriz.)
+          </p>
+
+          <div class="actions">
+            <a class="btn btn--cream" href="#" onclick="alert('Buraya bebek kategorisi sayfası/Trendyol linki ekleyebiliriz.'); return false;">
+              Kategoriyi Aç
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Oto -->
+      <div class="card">
+        <div class="header">
+          <div class="tag">Oto Aksesuar</div>
+          <div class="tag" style="border-color: rgba(246,210,122,.35);">
+            Siyah/Altın Tema
+          </div>
+        </div>
+        <div class="content">
+          <div class="logoWrap" style="background: linear-gradient(135deg, rgba(246,210,122,.18), rgba(185,138,47,.10));">
+            <img src="velora-oto.jpg" alt="Velora Oto Logo">
+          </div>
+
+          <h2>Oto Aksesuar</h2>
+          <p>
+            Premium görünüm: siyah zemin + altın vurgular.
+            Ürünler için “buton/galeri” yapısı eklemeye uygun.
+          </p>
+
+          <div class="actions">
+            <a class="btn btn--gold" href="#" onclick="alert('Buraya oto kategorisi sayfası/Trendyol linki ekleyebiliriz.'); return false;">
+              Kategoriyi Aç
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- WhatsApp numarası girişi -->
+    <div class="wa">
+      <h3>WhatsApp ile İletişim</h3>
+      <p>
+        Buradan WhatsApp numaranı girip tek tuşla konuşmayı başlatabilirsin.
+        Numara formatı: <b>90 ile başlayacak</b> (örnek: 905XXXXXXXXX).
+      </p>
+
+      <div class="waRow">
+        <input id="waNumber" class="input" type="tel" placeholder="Örn: 905xxxxxxxxx" />
+        <button class="btn btn--gold" onclick="openWhatsApp()">
+          WhatsApp’tan Yaz
+        </button>
+      </div>
+
+      <div class="hint">
+        İpucu: Eğer “Mağaza WhatsApp” butonunu sabit yapmak istersen, aşağıdaki kodda <b>STORE_WHATSAPP</b> değerini kendi numaranla değiştirmen yeterli.
+      </div>
+    </div>
+
+    <footer>
+      © 2026 Velora Store — Tüm Hakları Saklıdır
+    </footer>
+
+  </div>
+
+  <script>
+    // 1) MAĞAZA WhatsApp numarası (SABİT):
+    // Buraya kendi mağaza WhatsApp numaranı yaz.
+    // Örn: 905xxxxxxxxx (boşluk, +, parantez yok)
+    const STORE_WHATSAPP = "905300882492"; // <- BURAYI DEĞİŞTİR
+
+    // 2) Varsayılan mesaj
+    const DEFAULT_MESSAGE = "Merhaba, Velora Store hakkında bilgi almak istiyorum.";
+
+    function sanitizeNumber(raw){
+      // Sadece rakam bırak
+      return (raw || "").replace(/\D/g, "");
+    }
+
+    function buildWaLink(number){
+      const n = sanitizeNumber(number);
+      const msg = encodeURIComponent(DEFAULT_MESSAGE);
+      return "https://wa.me/" + n + "?text=" + msg;
+    }
+
+    // Üstteki mağaza butonunu doldur
+    (function initStoreWa(){
+      const btn = document.getElementById("storeWaBtn");
+      btn.href = buildWaLink(STORE_WHATSAPP);
+    })();
+
+    // Kullanıcının girdiği numarayla WhatsApp aç
+    function openWhatsApp(){
+      const input = document.getElementById("waNumber");
+      const n = sanitizeNumber(input.value);
+
+      if(!n){
+        alert("Lütfen WhatsApp numaranı gir.");
+        return;
+      }
+
+      // Basit kontrol: 11-15 hane arası
+      if(n.length < 11 || n.length > 15){
+        alert("Numara hatalı görünüyor. Örn: 905xxxxxxxxx");
+        return;
+      }
+
+      window.open(buildWaLink(n), "_blank", "noopener");
+    }
+  </script>
 </body>
 </html>
