@@ -1,165 +1,125 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VELORA TRADE</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Velora Trade</title>
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: white;
-    }
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0d0d0d;
+    color: white;
+}
 
-    header {
-      background: #000;
-      color: #d4af37;
-      text-align: center;
-      padding: 20px 10px;
-      font-size: 32px;
-      font-weight: bold;
-      letter-spacing: 1px;
-      border-bottom: 1px solid #333;
-    }
+/* ÜST BAŞLIK */
+header {
+    text-align: center;
+    padding: 20px;
+    font-size: 26px;
+    font-weight: bold;
+    color: gold;
+    border-bottom: 1px solid #222;
+}
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 40px 20px;
-    }
+/* ÜRÜNLER */
+.products {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    padding: 40px 20px;
+}
 
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 25px;
-    }
+.product {
+    background: #1a1a1a;
+    padding: 15px;
+    border-radius: 12px;
+    width: 250px;
+    text-align: center;
+    transition: 0.3s;
+}
 
-    .product-card {
-      background: #1b1b1b;
-      border: 1px solid #333;
-      border-radius: 16px;
-      padding: 18px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.35);
-    }
+.product:hover {
+    transform: scale(1.03);
+}
 
-    .product-card img {
-      width: 100%;
-      height: 260px;
-      object-fit: cover;
-      border-radius: 12px;
-      background: #000;
-    }
+.product img {
+    width: 100%;
+    border-radius: 10px;
+}
 
-    .product-title {
-      margin-top: 16px;
-      font-size: 18px;
-      font-weight: bold;
-      line-height: 1.5;
-      color: #fff;
-    }
+/* ÜRÜN YAZISI */
+.product h3 {
+    font-size: 14px;
+    margin: 10px 0;
+}
 
-    .contact-box {
-      margin-top: 45px;
-      background: #1b1b1b;
-      border: 1px solid #333;
-      border-radius: 16px;
-      padding: 22px;
-      text-align: center;
-    }
+/* İLETİŞİM */
+.contact {
+    text-align: center;
+    padding: 30px;
+    border-top: 1px solid #222;
+}
 
-    .contact-box h2 {
-      margin-top: 0;
-      color: #d4af37;
-      font-size: 24px;
-    }
+.contact a {
+    display: block;
+    color: #25D366;
+    text-decoration: none;
+    margin: 10px 0;
+    font-size: 16px;
+}
 
-    .contact-box p {
-      margin: 10px 0;
-      font-size: 17px;
-      color: #eee;
-      word-break: break-word;
-    }
+footer {
+    text-align: center;
+    font-size: 12px;
+    color: gray;
+    padding: 15px;
+}
+</style>
 
-    .contact-box a {
-      color: #ffffff;
-      text-decoration: none;
-    }
-
-    .contact-box a:hover {
-      text-decoration: underline;
-    }
-
-    footer {
-      text-align: center;
-      color: #999;
-      padding: 25px 15px 35px;
-      font-size: 14px;
-    }
-
-    @media (max-width: 600px) {
-      header {
-        font-size: 26px;
-      }
-
-      .product-title {
-        font-size: 16px;
-      }
-
-      .product-card img {
-        height: 220px;
-      }
-    }
-  </style>
 </head>
+
 <body>
 
-  <header>VELORA TRADE</header>
+<header>
+VELORA TRADE
+</header>
 
-  <div class="container">
-    <section class="products">
-      <div class="product-card">
-        <img src="velora-oto.jpg" alt="Sibop kapağı ürün görseli">
-        <div class="product-title">
-          Premium Metal Krom Sibop Kapağı 4'lü Set- Universal Lastik Valf Kapağı Paslanmaz Şık Tasarım
-        </div>
-      </div>
+<section class="products">
 
-      <div class="product-card">
-        <img src="velora-oto.jpg" alt="Sibop kapağı ürün görseli">
-        <div class="product-title">
-          Premium Metal Krom Sibop Kapağı 4'lü Set- Universal Lastik Valf Kapağı Paslanmaz Şık Tasarım
-        </div>
-      </div>
+<div class="product">
+<img src="velora-oto.jpg">
+<h3>
+Premium Metal Krom Sibop Kapağı 4'lü Set - Universal Lastik Valf Kapağı Paslanmaz Şık Tasarım
+</h3>
+</div>
 
-      <div class="product-card">
-        <img src="velora-oto.jpg" alt="Sibop kapağı ürün görseli">
-        <div class="product-title">
-          Premium Metal Krom Sibop Kapağı 4'lü Set- Universal Lastik Valf Kapağı Paslanmaz Şık Tasarım
-        </div>
-      </div>
+<div class="product">
+<img src="velora-oto.jpg">
+<h3>
+Premium Metal Krom Sibop Kapağı 4'lü Set - Universal Lastik Valf Kapağı Paslanmaz Şık Tasarım
+</h3>
+</div>
 
-      <div class="product-card">
-        <img src="velora-oto.jpg" alt="Sibop kapağı ürün görseli">
-        <div class="product-title">
-          Premium Metal Krom Sibop Kapağı 4'lü Set- Universal Lastik Valf Kapağı Paslanmaz Şık Tasarım
-        </div>
-      </div>
-    </section>
+</section>
 
-    <section class="contact-box">
-      <h2>İletişim</h2>
-      <p>WhatsApp: <a href="https://wa.me/905300882492" target="_blank">0530 088 24 92</a></p>
-      <p>E-posta: <a href="mailto:veloratrade@outlook.com">veloratrade@outlook.com</a></p>
-    </section>
-  </div>
+<section class="contact">
 
-  <footer>© VELORA TRADE</footer>
+<a href="https://wa.me/905300882492" target="_blank">
+📲 WhatsApp: 0530 088 24 92
+</a>
+
+<a href="mailto:veloratrade@outlook.com">
+📧 veloratrade@outlook.com
+</a>
+
+</section>
+
+<footer>
+© Velora Trade
+</footer>
 
 </body>
 </html>
