@@ -8,41 +8,30 @@
 <style>
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: Arial;
     background: #0d0d0d;
     color: white;
 }
 
-/* ÜST BAŞLIK */
 header {
     text-align: center;
     padding: 20px;
     font-size: 26px;
-    font-weight: bold;
     color: gold;
-    border-bottom: 1px solid #222;
 }
 
-/* ÜRÜNLER */
 .products {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 25px;
-    padding: 40px 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
 }
 
 .product {
     background: #1a1a1a;
-    padding: 15px;
-    border-radius: 12px;
-    width: 250px;
+    padding: 10px;
+    border-radius: 10px;
     text-align: center;
-    transition: 0.3s;
-}
-
-.product:hover {
-    transform: scale(1.03);
 }
 
 .product img {
@@ -50,32 +39,29 @@ header {
     border-radius: 10px;
 }
 
-/* ÜRÜN YAZISI */
 .product h3 {
-    font-size: 14px;
-    margin: 10px 0;
+    font-size: 13px;
 }
 
-/* İLETİŞİM */
+.price {
+    color: gold;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px;
+    background: #25D366;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
 .contact {
     text-align: center;
-    padding: 30px;
-    border-top: 1px solid #222;
-}
-
-.contact a {
-    display: block;
-    color: #25D366;
-    text-decoration: none;
-    margin: 10px 0;
-    font-size: 16px;
-}
-
-footer {
-    text-align: center;
-    font-size: 12px;
-    color: gray;
-    padding: 15px;
+    padding: 20px;
 }
 </style>
 
@@ -83,43 +69,47 @@ footer {
 
 <body>
 
-<header>
-VELORA TRADE
-</header>
+<header>VELORA TRADE</header>
 
 <section class="products">
 
+<!-- 🔽 ÜRÜN 1 -->
 <div class="product">
-<img src="velora-oto.jpg">
-<h3>
-Premium Metal Krom Sibop Kapağı 4'lü Set - Universal Lastik Valf Kapağı Paslanmaz Şık Tasarım
-</h3>
+<img src="urun1.jpg"> <!-- BURAYA GÖRSEL -->
+<h3>Premium Metal Krom Sibop Kapağı 4'lü Set</h3> <!-- ÜRÜN ADI -->
+<div class="price">300 TL</div> <!-- FİYAT -->
+<a class="btn" href="https://wa.me/905300882492">WhatsApp Sipariş</a>
 </div>
 
+<!-- 🔽 ÜRÜN 2 -->
 <div class="product">
-<img src="velora-oto.jpg">
-<h3>
-Premium Metal Krom Sibop Kapağı 4'lü Set - Universal Lastik Valf Kapağı Paslanmaz Şık Tasarım
-</h3>
+<img src="urun2.jpg">
+<h3>Premium Metal Krom Sibop Kapağı 4'lü Set</h3>
+<div class="price">300 TL</div>
+<a class="btn" href="https://wa.me/905300882492">WhatsApp Sipariş</a>
 </div>
+
+<!-- 🔽 ÜRÜN 3 -->
+<div class="product">
+<img src="urun3.jpg">
+<h3>Premium Metal Krom Sibop Kapağı 4'lü Set</h3>
+<div class="price">300 TL</div>
+<a class="btn" href="https://wa.me/905300882492">WhatsApp Sipariş</a>
+</div>
+
+<!-- 🔽 BURADAN SONRASINI KOPYALA ÇOĞALT -->
 
 </section>
 
 <section class="contact">
-
-<a href="https://wa.me/905300882492" target="_blank">
-📲 WhatsApp: 0530 088 24 92
-</a>
-
-<a href="mailto:veloratrade@outlook.com">
+📲 0530 088 24 92 <br>
 📧 veloratrade@outlook.com
-</a>
-
 </section>
-
-<footer>
-© Velora Trade
-</footer>
 
 </body>
 </html>
+urun1.jpg
+urun2.jpg
+urun3.jpg
+...
+urun28.jpg
